@@ -147,7 +147,7 @@ export default {
         .catch((error) => console.log(error));
     },
     checkoutPesanan: function () {
-      if (this.pesan.nama && this.pesan.noMeja) {
+      if (this.pesan.nama && this.pesan.noMeja && this.carts.length !== 0) {
         // add cart to pesan obj
         this.pesan.keranjangs = this.carts;
         axios
@@ -170,12 +170,24 @@ export default {
           })
           .catch((err) => console.log(err));
       } else {
-        this.$toast.error("Nama dan Nomor Meja Harus diisi", {
-          type: "error",
-          position: "top-right",
-          duration: 3000,
-          dismissible: true,
-        });
+        if (this.carts.length === 0) {
+          this.$toast.error(
+            "Maaf, Pesanan kamu gagal dibuat karna keranjang masih kosong",
+            {
+              type: "error",
+              position: "top-right",
+              duration: 3000,
+              dismissible: true,
+            }
+          );
+        } else {
+          this.$toast.error("Nama dan Nomor Meja Harus diisi", {
+            type: "error",
+            position: "top-right",
+            duration: 3000,
+            dismissible: true,
+          });
+        }
       }
     },
   },
