@@ -52,7 +52,6 @@ export default {
       this.bestProducts = res;
     },
   },
-
   //fire when page rendered
   mounted() {
     axios

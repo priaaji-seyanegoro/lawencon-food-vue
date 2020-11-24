@@ -5,6 +5,7 @@ dependencies:
   vue: 2.6.12
   vue-router: 3.4.9
   vue-toast-notification: 0.6.0_vue@2.6.12
+  vuex: 3.5.1_vue@2.6.12
 devDependencies:
   '@babel/polyfill': 7.12.1
   '@vue/cli-plugin-babel': 4.5.9_8ae91920fb9b3c76895c2e8acb765728
@@ -1486,7 +1487,7 @@ packages:
       node: '>=8'
     hasBin: true
     optionalDependencies:
-      vue-loader-v16: /vue-loader/16.0.0-rc.1
+      vue-loader-v16: /vue-loader/16.0.0-rc.2
     peerDependencies:
       '@vue/compiler-sfc': ^3.0.0-beta.14
       less-loader: '*'
@@ -8716,7 +8717,7 @@ packages:
         optional: true
     resolution:
       integrity: sha512-oeMOs2b5o5gRqkxfds10bCx6JeXYTwivRgbb8hzOrcThD2z1+GqEKE3EX9A2SGbsYDf4rXwRg6D5n1w0jO5SwA==
-  /vue-loader/16.0.0-rc.1:
+  /vue-loader/16.0.0-rc.2:
     dependencies:
       chalk: 4.1.0
       hash-sum: 2.0.0
@@ -8724,7 +8725,7 @@ packages:
     dev: true
     optional: true
     resolution:
-      integrity: sha512-yR+BS90EOXTNieasf8ce9J3TFCpm2DGqoqdbtiwQ33hon3FyIznLX7sKavAq1VmfBnOeV6It0Htg4aniv8ph1g==
+      integrity: sha512-cz8GK4dgIf1UTC+do80pGvh8BHcCRHLIQVHV9ONVQ8wtoqS9t/+H02rKcQP+TVNg7khgLyQV2+8eHUq7/AFq3g==
   /vue-router/3.4.9:
     dev: false
     resolution:
@@ -8761,6 +8762,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
+  /vuex/3.5.1_vue@2.6.12:
+    dependencies:
+      vue: 2.6.12
+    dev: false
+    peerDependencies:
+      vue: ^2.0.0
+    resolution:
+      integrity: sha512-w7oJzmHQs0FM9LXodfskhw9wgKBiaB+totOdb8sNzbTB2KDCEEwEs29NzBZFh/lmEK1t5tDmM1vtsO7ubG1DFw==
   /watchpack-chokidar2/2.0.1:
     dependencies:
       chokidar: 2.1.8
@@ -9144,3 +9153,4 @@ specifiers:
   vue-router: ^3.2.0
   vue-template-compiler: ^2.6.11
   vue-toast-notification: ^0.6.0
+  vuex: ^3.5.1

@@ -2,35 +2,56 @@
   <div>
     <b-navbar toggleable="lg" type="light">
       <div class="container">
-        <b-navbar-brand class="text-dark">Lawencon Food</b-navbar-brand>
+        <b-navbar-brand class="text-dark">
+          <router-link
+            class="nav-link text-dark"
+            to="/"
+            v-if="!this.$store.state.authenticated"
+            >Lawencon Food</router-link
+          >
+          <span v-else-if="this.$store.state.authenticated">Lawencon Food</span>
+        </b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <div v-if="this.$store.state.authenticated">
+          <b-collapse id="nav-collapse" is-nav>
+            <b-navbar-nav>
+              <li class="nav-item">
+                <router-link class="nav-link text-dark" to="/home"
+                  >Home</router-link
+                >
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link text-dark" to="/foods"
+                  >Foods</router-link
+                >
+              </li>
+            </b-navbar-nav>
 
-        <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav>
-            <li class="nav-item">
-              <router-link class="nav-link text-dark" to="/">Home</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link text-dark" to="/foods"
-                >Foods</router-link
-              >
-            </li>
-          </b-navbar-nav>
-
-          <!-- Right aligned nav items -->
-          <b-navbar-nav class="ml-auto">
-            <li class="nav-item">
-              <router-link class="nav-link text-dark" to="/cart">
-                Keranjang
-                <b-icon-bag />
-                <span class="badge badge-success ml-2">{{
-                  updatedCart ? updatedCart.length : amount_order.length
-                }}</span>
-              </router-link>
-            </li>
-          </b-navbar-nav>
-        </b-collapse>
+            <!-- Right aligned nav items -->
+            <b-navbar-nav class="ml-auto">
+              <li class="nav-item">
+                <router-link class="nav-link text-dark" to="/cart">
+                  Keranjang
+                  <b-icon-bag />
+                  <span class="badge badge-success ml-2">{{
+                    updatedCart ? updatedCart.length : amount_order.length
+                  }}</span>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <b-button
+                  variant="outline-success"
+                  size="md"
+                  class="ml-2"
+                  @click="logout"
+                >
+                  <b-icon icon="power" aria-hidden="true"></b-icon> Logout
+                </b-button>
+              </li>
+            </b-navbar-nav>
+          </b-collapse>
+        </div>
       </div>
     </b-navbar>
   </div>
@@ -54,6 +75,11 @@ export default {
   methods: {
     setAmountOrder: function (data) {
       this.amount_order = data;
+    },
+    logout: function () {
+      // set state on store
+      this.$store.commit("setAuthentication", false);
+      this.$router.push({ path: "/" });
     },
   },
   mounted() {

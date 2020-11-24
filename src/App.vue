@@ -11,5 +11,8 @@ export default {
   components: {
     Footer,
   },
+  mounted() {
+    console.log(this.$store.state.authenticated);
+  },
 };
 </script>
