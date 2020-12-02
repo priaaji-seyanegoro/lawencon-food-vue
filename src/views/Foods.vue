@@ -71,7 +71,9 @@ export default {
       axios
         .get(`http://localhost:3000/products?q=${this.queryParams}`)
         .then((result) => {
-          this.setProduct(result.data);
+          this.$store.commit("setFoods", result.data);
+          // console.log(this.$store.state.bestFood);
+          this.setProduct(this.$store.state.foods);
         })
         .catch((err) => {
           console.log(err);
@@ -84,7 +86,9 @@ export default {
     axios
       .get("http://localhost:3000/products")
       .then((result) => {
-        this.setProduct(result.data);
+        this.$store.commit("setFoods", result.data);
+        // console.log(this.$store.state.bestFood);
+        this.setProduct(this.$store.state.foods);
       })
       .catch((err) => {
         console.log(err);
