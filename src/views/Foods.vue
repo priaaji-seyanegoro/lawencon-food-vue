@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <div class="container">
       <!-- title page -->
       <div class="row mt-4">
@@ -50,14 +49,12 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar";
 import ProductCard from "@/components/ProductCard";
 import axios from "axios";
 
 export default {
   name: "Foods",
   components: {
-    Navbar,
     ProductCard,
   },
   data() {

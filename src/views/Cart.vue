@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar :updatedCart="carts" />
     <div class="container text-center">
       <div class="row mt-4">
         <!-- breadcrumb  -->
@@ -110,14 +109,11 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar";
 import axios from "axios";
 
 export default {
   name: "Cart",
-  components: {
-    Navbar,
-  },
+  components: {},
   data() {
     return {
       carts: [],
@@ -132,6 +128,7 @@ export default {
       axios
         .delete(`http://localhost:3000/keranjangs/${id}`)
         .then(() => {
+          this.$store.commit("deletedCarts", id);
           this.$toast.error("Sukses Hapus Keranjang", {
             type: "error",
             position: "top-right",

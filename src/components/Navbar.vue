@@ -13,7 +13,7 @@
         </b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-        <div v-if="this.$store.state.authenticated">
+        <template v-if="this.$store.state.authenticated">
           <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav>
               <li class="nav-item">
@@ -35,23 +35,18 @@
                   Keranjang
                   <b-icon-bag />
                   <span class="badge badge-success ml-2">{{
-                    updatedCart ? updatedCart.length : amount_order.length
+                    this.$store.state.carts.length
                   }}</span>
                 </router-link>
               </li>
               <li class="nav-item">
-                <b-button
-                  variant="outline-success"
-                  size="md"
-                  class="ml-2"
-                  @click="logout"
-                >
+                <b-button variant="outline-success" size="md" @click="logout">
                   <b-icon icon="power" aria-hidden="true"></b-icon> Logout
                 </b-button>
               </li>
             </b-navbar-nav>
           </b-collapse>
-        </div>
+        </template>
       </div>
     </b-navbar>
   </div>
@@ -67,14 +62,9 @@ export default {
       type: Array,
     },
   },
-  data() {
-    return {
-      amount_order: [],
-    };
-  },
   methods: {
     setAmountOrder: function (data) {
-      this.amount_order = data;
+      this.carts = data;
     },
     logout: function () {
       // set state on store
@@ -86,7 +76,8 @@ export default {
     axios
       .get(`http://localhost:3000/keranjangs`)
       .then((result) => {
-        this.setAmountOrder(result.data);
+        this.$store.commit("setCarts", result.data);
+        this.setAmountOrder(this.$store.state.carts);
       })
       .catch((err) => {
         console.log(err);

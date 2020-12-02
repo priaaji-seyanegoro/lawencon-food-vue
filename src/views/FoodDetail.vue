@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <div class="container">
       <!-- breadcrumb -->
       <div class="row mt-4">
@@ -63,7 +62,7 @@
             </div>
 
             <button type="submit" class="btn btn-success" @click="ordered">
-              <b-icon-cart /> Pesan
+              <b-icon-cart /> Pesan {{ totalPrice }}
             </button>
           </form>
         </div>
@@ -73,19 +72,25 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar";
 import axios from "axios";
 
 export default {
   name: "FoodDetail",
-  components: {
-    Navbar,
-  },
+  components: {},
   data() {
     return {
       product: {},
       order: {},
     };
+  },
+  computed: {
+    totalPrice: function () {
+      if (this.order.qty_order) {
+        return `Rp. ${this.order.qty_order * this.product.harga}`;
+      } else {
+        return `Rp. 0`;
+      }
+    },
   },
   methods: {
     setProduct: function (res) {
@@ -96,7 +101,9 @@ export default {
         this.order.product = this.product;
         axios
           .post(`http://localhost:3000/keranjangs`, this.order)
-          .then(() => {
+          .then((res) => {
+            console.log(res);
+            this.$store.commit("updatedCarts", res.data);
             // redirect to cart
             this.$router.push({ path: "/cart" });
             this.$toast.success("Sukses Masuk Keranjang", {

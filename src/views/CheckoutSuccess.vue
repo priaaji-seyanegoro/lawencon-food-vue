@@ -1,6 +1,5 @@
 <template>
   <div class="pesanan-sukses">
-    <Navbar />
     <div class="container">
       <div class="row justify-content-center mt-5">
         <div class="col text-center">
@@ -17,12 +16,19 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
+import axios from "axios";
 
 export default {
   name: "CheckoutSuccess",
-  components: {
-    Navbar,
+  mounted() {
+    axios
+      .get(`http://localhost:3000/keranjangs`)
+      .then((result) => {
+        this.$store.commit("setCarts", result.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

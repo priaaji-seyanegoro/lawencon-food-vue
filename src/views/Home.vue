@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <Navbar />
     <div class="container">
       <Banner />
 
@@ -30,7 +29,7 @@
 
 <script>
 // @ is an alias to /src
-import Navbar from "@/components/Navbar";
+
 import Banner from "@/components/Banner";
 import ProductCard from "@/components/ProductCard";
 import axios from "axios";
@@ -38,7 +37,6 @@ import axios from "axios";
 export default {
   name: "Home",
   components: {
-    Navbar,
     Banner,
     ProductCard,
   },
@@ -57,7 +55,9 @@ export default {
     axios
       .get("http://localhost:3000/best-products")
       .then((result) => {
-        this.setProduct(result.data);
+        this.$store.commit("setBestFood", result.data);
+        // console.log(this.$store.state.bestFood);
+        this.setProduct(this.$store.state.bestFood);
       })
       .catch((err) => {
         console.log(err);
