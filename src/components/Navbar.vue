@@ -12,8 +12,8 @@
           <span v-else-if="this.$store.state.authenticated">Lawencon Food</span>
         </b-navbar-brand>
 
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <template v-if="this.$store.state.authenticated">
+          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
           <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav>
               <li class="nav-item">
