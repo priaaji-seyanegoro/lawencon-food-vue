@@ -7,6 +7,7 @@ import { store } from "./store/store";
 import App from "./App.vue";
 import router from "./router";
 import "./main.css";
+import './registerServiceWorker'
 
 Vue.config.productionTip = false;
 

@@ -17,7 +17,7 @@
       <div class="row mb-3">
         <div
           class="col-md-4 mt-4 d-flex justify-content-center"
-          v-for="product in bestProducts"
+          v-for="product in bestFoods"
           :key="product.id"
         >
           <ProductCard :product="product" />
@@ -40,14 +40,9 @@ export default {
     Banner,
     ProductCard,
   },
-  data() {
-    return {
-      bestProducts: [],
-    };
-  },
-  methods: {
-    setProduct: function (res) {
-      this.bestProducts = res;
+  computed: {
+    bestFoods() {
+      return this.$store.state.bestFood;
     },
   },
   //fire when page rendered
@@ -57,10 +52,18 @@ export default {
       .then((result) => {
         this.$store.commit("setBestFood", result.data);
         // console.log(this.$store.state.bestFood);
-        this.setProduct(this.$store.state.bestFood);
       })
       .catch((err) => {
         console.log(err);
+        this.$toast.error(
+          "You're Offline, Please Check your internet connection",
+          {
+            type: "error",
+            position: "top-right",
+            duration: 3000,
+            dismissible: true,
+          }
+        );
       });
   },
 };

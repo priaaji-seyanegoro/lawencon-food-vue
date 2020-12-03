@@ -38,7 +38,7 @@
       <div class="row mb-4">
         <div
           class="col-md-4 mt-4 d-flex justify-content-center"
-          v-for="product in products"
+          v-for="product in foods"
           :key="product.id"
         >
           <ProductCard :product="product" />
@@ -63,17 +63,19 @@ export default {
       queryParams: "",
     };
   },
-  methods: {
-    setProduct: function (res) {
-      this.products = res;
+  computed: {
+    foods() {
+      return this.$store.state.foods;
     },
+  },
+  methods: {
     searchingFood: function () {
       axios
         .get(`http://localhost:3000/products?q=${this.queryParams}`)
         .then((result) => {
           this.$store.commit("setFoods", result.data);
           // console.log(this.$store.state.bestFood);
-          this.setProduct(this.$store.state.foods);
+          // this.setProduct(this.$store.state.foods);
         })
         .catch((err) => {
           console.log(err);
@@ -88,10 +90,19 @@ export default {
       .then((result) => {
         this.$store.commit("setFoods", result.data);
         // console.log(this.$store.state.bestFood);
-        this.setProduct(this.$store.state.foods);
+        // this.setProduct(this.$store.state.foods);
       })
       .catch((err) => {
         console.log(err);
+        this.$toast.error(
+          "You're Offline, Please Check your internet connection",
+          {
+            type: "error",
+            position: "top-right",
+            duration: 3000,
+            dismissible: true,
+          }
+        );
       });
   },
 };
