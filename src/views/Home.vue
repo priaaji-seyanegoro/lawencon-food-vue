@@ -17,7 +17,7 @@
       <div class="row mb-3">
         <div
           class="col-md-4 mt-4 d-flex justify-content-center"
-          v-for="product in bestFoods"
+          v-for="product in bestFood"
           :key="product.id"
         >
           <ProductCard :product="product" />
@@ -33,6 +33,7 @@
 import Banner from "@/components/Banner";
 import ProductCard from "@/components/ProductCard";
 import axios from "axios";
+import { mapState } from "vuex";
 
 export default {
   name: "Home",
@@ -41,12 +42,14 @@ export default {
     ProductCard,
   },
   computed: {
-    bestFoods() {
-      return this.$store.state.bestFood;
-    },
+    // bestFoods() {
+    //   return this.$store.state.bestFood;
+    // },
+
+    ...mapState(["bestFood"]),
   },
   //fire when page rendered
-  mounted() {
+  created() {
     axios
       .get("http://localhost:3000/best-products")
       .then((result) => {

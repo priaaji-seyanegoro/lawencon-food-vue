@@ -51,6 +51,7 @@
 <script>
 import ProductCard from "@/components/ProductCard";
 import axios from "axios";
+import { mapState } from "vuex";
 
 export default {
   name: "Foods",
@@ -64,9 +65,10 @@ export default {
     };
   },
   computed: {
-    foods() {
-      return this.$store.state.foods;
-    },
+    // foods() {
+    //   return this.$store.state.foods;
+    // },
+    ...mapState(["foods"]),
   },
   methods: {
     searchingFood: function () {
@@ -84,7 +86,7 @@ export default {
   },
 
   //fire when page rendered
-  mounted() {
+  created() {
     axios
       .get("http://localhost:3000/products")
       .then((result) => {
